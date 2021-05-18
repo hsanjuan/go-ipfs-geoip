@@ -1,3 +1,8 @@
+// Package ipfsgeoip provides geoip information lookup using an IPFS-hosted
+// GeoLite2 database. The database is split to allow efficient lookups and it
+// does not need to be fully downloaded for every lookup.
+//
+// This package is a fork of ipfs-geoip (Javascript).
 package ipfsgeoip
 
 import (

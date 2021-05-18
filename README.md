@@ -10,7 +10,8 @@ This is a Go implementation of [ipfs-geoip](https://github.com/ipfs-shipyard/ipf
 Best suited for use with an `ipld.DAGService`, as provided by
 [go-ipfs-geoip](https://github.com/hsanjuan/go-ipfs-geoip).
 
-Currently only IPv4 lookups are supported.
+Currently only IPv4 lookups are supported. The author does not maintain the
+database, which has been made available via IPFS.
 
 For an example, see `ipfsgeoip_test.go`.
 
