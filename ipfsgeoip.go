@@ -33,6 +33,7 @@ type nodeData struct {
 	} `json:"data"`
 }
 
+// GeoIPInfo provides geographical information about an IP address.
 type GeoIPInfo struct {
 	CountryName string
 	CountryCode string
@@ -43,6 +44,8 @@ type GeoIPInfo struct {
 	Longitude   float64
 }
 
+// UnmarshalJSON decodes geoip-information objects as they
+// are stored in the database.
 func (gipi *GeoIPInfo) UnmarshalJSON(b []byte) error {
 	var nZero int
 	err := json.Unmarshal(b, &nZero)
@@ -92,18 +95,22 @@ func (gipi *GeoIPInfo) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
-// IPLocator obtains geo information for IP addresses using IPFS.
+// IPLocator obtains geo information for IP addresses by using a GeoLite2
+// database hosted on IPFS.
 type IPLocator struct {
 	ng format.NodeGetter
 }
 
+// NewIPLocator returns an IPLocator that uses the given NodeGetter.
 func NewIPLocator(ng format.NodeGetter) *IPLocator {
 	return &IPLocator{
 		ng: ng,
 	}
 }
 
-func (l *IPLocator) LookUp(ctx context.Context, addr string) (GeoIPInfo, error) {
+// Lookup provides GeoIP information for a given address in string form.  Only
+// IPv4 addresses are supported.
+func (l *IPLocator) Lookup(ctx context.Context, addr string) (GeoIPInfo, error) {
 	ip, err := ipFromString(addr)
 	if err != nil {
 		return GeoIPInfo{}, err
@@ -178,6 +185,8 @@ func ipFromString(addr string) (net.IP, error) {
 	return ip, nil
 }
 
+// FIXME: in the end, this relies on Go internal representation
+// of IPs inside net.IP.
 func ip4ToUint(ip net.IP) uint {
 	n := uint(0)
 	for b := 0; b < 4; b++ {

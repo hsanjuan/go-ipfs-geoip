@@ -1,9 +1,10 @@
-package ipfsgeoip
+package ipfsgeoip_test
 
 import (
 	"context"
 	"testing"
 
+	ipfsgeoip "github.com/hsanjuan/go-ipfs-geoip"
 	ipfslite "github.com/hsanjuan/ipfs-lite"
 	"github.com/libp2p/go-libp2p-core/crypto"
 )
@@ -38,8 +39,8 @@ func Test(t *testing.T) {
 
 	lite.Bootstrap(ipfslite.DefaultBootstrapPeers())
 
-	l := NewIPLocator(lite.Session(ctx))
-	loc, err := l.LookUp(ctx, "8.8.8.8")
+	l := ipfsgeoip.NewIPLocator(lite.Session(ctx))
+	loc, err := l.Lookup(ctx, "8.9.10.11")
 	if err != nil {
 		t.Fatal(err)
 	}
