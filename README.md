@@ -8,7 +8,7 @@
 This is a Go implementation of [ipfs-geoip](https://github.com/ipfs-shipyard/ipfs-geoip).
 
 Best suited for use with an `ipld.DAGService`, as provided by
-[go-ipfs-geoip](https://github.com/hsanjuan/go-ipfs-geoip).
+[ipfs-lite](https://github.com/hsanjuan/ipfs-lite).
 
 Currently only IPv4 lookups are supported. The author does not maintain the
 database, which has been made available via IPFS.
